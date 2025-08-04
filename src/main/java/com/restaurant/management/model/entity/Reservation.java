@@ -1,29 +1,34 @@
 package com.restaurant.management.model.entity;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class Reservation {
     private int reservationId;
     private int tableId;
     private int userId;
-    private LocalDateTime reservationTime;
-    private int partySize;
+    private Timestamp reservationTime;
     private String status;
-    private String specialRequest;
+    private Timestamp createdAt;
 
-    public Reservation() {
-    }
-
-    public Reservation(int reservationId, int tableId, int userId, LocalDateTime reservationTime,
-                       int partySize, String status, String specialRequest) {
+    // ✅ Constructor for full record (used when reading from DB)
+    public Reservation(int reservationId, int tableId, int userId, Timestamp reservationTime, String status, Timestamp createdAt) {
         this.reservationId = reservationId;
         this.tableId = tableId;
         this.userId = userId;
         this.reservationTime = reservationTime;
-        this.partySize = partySize;
         this.status = status;
-        this.specialRequest = specialRequest;
+        this.createdAt = createdAt;
     }
+
+    // ✅ Constructor for inserting a new reservation (used in creation logic)
+    public Reservation(int tableId, int userId, Timestamp reservationTime, String status) {
+        this.tableId = tableId;
+        this.userId = userId;
+        this.reservationTime = reservationTime;
+        this.status = status;
+    }
+
+    // 👇 Getters & Setters
 
     public int getReservationId() {
         return reservationId;
@@ -49,20 +54,12 @@ public class Reservation {
         this.userId = userId;
     }
 
-    public LocalDateTime getReservationTime() {
+    public Timestamp getReservationTime() {
         return reservationTime;
     }
 
-    public void setReservationTime(LocalDateTime reservationTime) {
+    public void setReservationTime(Timestamp reservationTime) {
         this.reservationTime = reservationTime;
-    }
-
-    public int getPartySize() {
-        return partySize;
-    }
-
-    public void setPartySize(int partySize) {
-        this.partySize = partySize;
     }
 
     public String getStatus() {
@@ -73,11 +70,11 @@ public class Reservation {
         this.status = status;
     }
 
-    public String getSpecialRequest() {
-        return specialRequest;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setSpecialRequest(String specialRequest) {
-        this.specialRequest = specialRequest;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }
