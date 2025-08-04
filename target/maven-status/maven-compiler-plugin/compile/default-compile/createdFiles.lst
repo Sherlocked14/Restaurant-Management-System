@@ -1,1 +1,8 @@
+com/restaurant/management/util/DatabaseConnectionUtil.class
 com/restaurant/management/Main.class
+com/restaurant/management/model/entity/User.class
+com/restaurant/management/service/impl/UserServiceImpl.class
+com/restaurant/management/config/DatabaseConnectionManager.class
+com/restaurant/management/service/interfaces/UserService.class
+com/restaurant/management/repository/UserDAOImpl.class
+com/restaurant/management/repository/UserDAO.class

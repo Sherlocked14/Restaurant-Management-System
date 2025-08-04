@@ -1,20 +1,39 @@
 package com.restaurant.management;
 
-import com.restaurant.management.config.DatabaseConnectionManager;
+import com.restaurant.management.model.entity.User;
+import com.restaurant.management.service.impl.UserServiceImpl;
 
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            Connection conn = DatabaseConnectionManager.getConnection();
-            if (conn != null) {
-                System.out.println("✅ PostgreSQL connection successful!");
+            UserServiceImpl userService = new UserServiceImpl();
+
+            // Create new user
+            User newUser = new User();
+            newUser.setUsername("john_doe");
+            newUser.setPassword("password123");
+            newUser.setFullName("John Doe");
+            newUser.setRole("WAITER");
+            newUser.setEmail("john@example.com");
+            newUser.setPhone("9876543210");
+            newUser.setActive(true);
+
+            userService.registerUser(newUser);
+            System.out.println("✅ User created successfully!");
+
+            // List all users
+            List<User> users = userService.getAllUsers();
+            System.out.println("📋 List of users:");
+            for (User user : users) {
+                System.out.println(user.getUserId() + " - " + user.getUsername() + " - " + user.getRole());
             }
-            DatabaseConnectionManager.closeConnection();
+
         } catch (SQLException e) {
-            System.err.println("❌ Connection failed: " + e.getMessage());
+            System.err.println("❌ Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
